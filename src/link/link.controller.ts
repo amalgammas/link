@@ -8,6 +8,8 @@ export class LinkController {
 
   @Get()
   getStatus(): { status: string; message: string } {
+
+      console.log('{QEQKFJDHFKJ')
     return {
       status: 'ok',
       message: 'link backend is running',

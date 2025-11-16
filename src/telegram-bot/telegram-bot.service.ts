@@ -19,13 +19,13 @@ export class TelegramBotService implements OnModuleInit, OnModuleDestroy {
     this.bot = new Telegraf(token);
     this.registerHandlers(this.bot);
 
-    try {
-      await this.bot.launch();
-      this.logger.log('Telegram bot is up and running.');
-    } catch (error) {
-      this.logger.error('Failed to launch Telegram bot', error as Error);
-      this.bot = undefined;
-    }
+    this.bot
+      .launch()
+      .then(() => this.logger.log('Telegram bot is up and running.'))
+      .catch((error) => {
+        this.logger.error('Failed to launch Telegram bot', error as Error);
+        this.bot = undefined;
+      });
   }
 
   onModuleDestroy(): void {
